@@ -135,8 +135,11 @@ glimpse(cancer_sample)
 
 <!-------------------------- Start your work below ---------------------------->
 I would like to choose `vancouver_trees` one for several reasons:
+
 1. The dataset is complex enough, with enough columns and rows for some data research
+
 2. The dataset contains different type such as `chr`, `dbl` and `date`
+
 3. Personally, I really wonder the distribution of trees in vancouver as the tree
   in campus is really beautiful.
 <!----------------------------------------------------------------------------->
@@ -170,8 +173,6 @@ Make sure that you're using dplyr and ggplot2 rather than base R for this task. 
 7.  Make a new tibble with a subset of your data, with variables and observations that you are interested in exploring.
 8.  Use a density plot to explore any of your variables (that are suitable for this type of plot).
 
-2.2 **(4 points)** For each of the 4 exercises that you complete, provide a *brief explanation* of why you chose that exercise in relation to your data (in other words, why does it make sense to do that?), and sufficient comments for a reader to understand your reasoning and code.
-
 <!-------------------------- Start your work below ---------------------------->
 *3.  Investigate how many missing values there are per variable. Can you find a way to plot this?*
 ```{r}
@@ -182,8 +183,10 @@ barplot(missing_values,
         ylab = "Number of Missing Values",
         las = 2)
 ```
+
 *4.  Explore the relationship between 2 variables in a plot.*
 The relation between street and the unique tree there.
+
 ```{r}
 genus_count_by_street <- vancouver_trees %>%
   group_by(on_street, genus_name) %>%
@@ -198,9 +201,11 @@ barplot(genus_count_by_street$count,
         ylab = "Count")
 
 ```
+
 *6.  Use a boxplot to look at the frequency of different observations within a single variable. You can do this for more than one variable if you wish!
 *
 The distribution of diameter among different species. As the species' amount is large, only choose 10 species.
+
 ```{r}
 
 top_10_species <- vancouver_trees %>%
@@ -239,17 +244,35 @@ ggplot(vancouver_trees, aes(x = species_name, y = diameter)) +
 7.  Make a new tibble with a subset of your data, with variables and observations that you are interested in exploring.
 
 ```{r}
-
+my_tribble <- vancouver_trees %>%
+  select(species_name, root_barrier, on_street, height_range_id, diameter, date_planted, longitude, latitude) %>%
+  as_tibble()
+head(my_tribble)
 ```
 <!----------------------------------------------------------------------------->
+
+2.2 **(4 points)** For each of the 4 exercises that you complete, provide a *brief explanation* of why you chose that exercise in relation to your data (in other words, why does it make sense to do that?), and sufficient comments for a reader to understand your reasoning and code.
+
+For question 3, because I need to do some data analysis based on the value, I need to know if the column value is enough to support the analysis, such as print a plot.
+
+For question 4, I plot the relation between street and the unique tree there.
+
+For question 6, I analysis the distribution of diameter among different species with box plot. As box plot is useful to get the distribution information of data.
+
+For question 7, because I do not need some columns such as `cultivar_name` so I just keep the data I want for future useage.
+
 
 # Task 3: Choose research questions 
 
 **(4 points)** So far, you have chosen a dataset and gotten familiar with it through exploring the data. You have also brainstormed one research question that interested you (Task 1.4).  Now it's time to pick 4 research questions that you would like to explore in Milestone 2! Write the 4 questions and any additional comments below. 
+
 <!--- *****START HERE***** --->
 1. Will the usage of root barrier affect the diameter and height of the tree?
+
 2. What is the average diameter and height of each species? (Because the species of the trees are too many, only count top 10 species)
+
 3. What is the relationship between tree age and height?
+
 4. What is the height and diameter distribution according to the longitude?
 <!----------------------------->
 
